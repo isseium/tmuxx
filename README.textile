@@ -1,0 +1,7 @@
+h1. tmuxx
+
+tmuxx は tmux をラップしたスクリプトと設定ファイルです。
+
+PC再起動の場合でも、windowの配置やカレントパス、window名前を記憶できます。
+
+@isseium
