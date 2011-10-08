@@ -1,7 +1,58 @@
 h1. tmuxx
 
-tmuxx は tmux をラップしたスクリプトと設定ファイルです。
+h2. 概要
 
+tmuxx は tmux をラップしたスクリプトと設定ファイルです。
 PC再起動の場合でも、windowの配置やカレントパス、window名前を記憶できます。
 
-@isseium
+Contact: <a href="http://twitter.com/isseium">@isseium</a>
+
+h2. 動作確認環境
+
+| OS | Mac OS X 10.7.1 |
+| シェル | Bash 3.2.48 |
+| tmux | 1.4 |
+
+h2. 初期設定
+
+h3. ソース展開
+
+<pre>
+$ mkdir -p ~/local/tmuxx
+$ cd ~/local/tmuxx
+$ git clone git://github.com/isseium/tmuxx.git
+</pre>
+
+h3. dot.bash_logout ファイルへシンボリックリンク
+
+注意: すでに ~/.bash_logout ファイルを設置している人は、.bash_logout ファイルに ~/local/tmuxx/dot.bash_logout ファイルの中身をコピペしてください。ln コマンドの発行は不要です。
+
+<pre>
+$ cd ~/
+$ ln -s ~/local/tmuxx/dot.bash_logout
+</pre>
+
+h3. tmuxx のエイリアス作成
+
+.bashrc ファイルの末尾に追加します
+<pre>
+$ vi ~/.bashrc
+alias tmuxx=/local/tmuxx 
+$ . .bashrc
+</pre>
+※ パスを通してもOKです
+
+h2. 使い方
+
+* 起動
+
+tmux コマンドではなく、tmuxx を起動します
+
+<pre>
+$ tmuxx
+</pre>
+
+* 終了
+
+再起動時など、状態を保存したいときは、window を exit コマンドで閉じるようにしてください。これをしないでOSを再起動すると、状態は保持されません。
+（現在、exit しなくても保持できるように改良予定）

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# 設定ファイルを読み込み
+RESTORE_DIR=~/.tmux/restore
+INIT_FILES=`ls $RESTORE_DIR/*.config 2> /dev/null`
+
+# config ファイルがないとき
+if [ ! $? ] ;then
+    tmux new-session
+    exit
+fi
+
+# session がすでに開いていれば警告を出して終了
+tmux has 2> /dev/null
+if [ $? -eq 0 ] ;then
+    echo "Session is already opened"
+    exit
+fi
+
+tmux new-session -d 
+for FILENAME in $INIT_FILES; do
+    eval `cat $FILENAME`   # config ファイル情報読み込み
+    tmux new-window -d -k -t :$window_id -n $window_name "cd $pwd; exec $SHELL --login"
+done
+
+tmux a
